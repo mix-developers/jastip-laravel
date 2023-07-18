@@ -10,18 +10,19 @@
             <!-- [ Main Content ] start -->
             <div class="row">
                 <!-- subscribe start -->
-
-                <div class="col-12">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>{{ $title }} </h5>
+                            <h5>{{ $title }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="row align-items-center m-l-0">
                                 <div class="col-sm-6">
                                 </div>
                                 <div class="col-sm-6 text-right">
-
+                                    {{-- <a href="{{ route('dashboard.galeri.create') }}"
+                                        class="btn btn-success btn-md mb-3 btn-round"><i class="feather f-16 icon-plus"></i>
+                                        Tambah</a> --}}
                                     <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
                                         data-target=".tambah"><i class="feather f-16 icon-plus"></i>
                                         Tambah</button>
@@ -32,43 +33,40 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Cabang</th>
-                                            <th>Nomor HP</th>
-                                            <th>Alamat</th>
-                                            <th>Manager</th>
+                                            <th>Avatar</th>
+                                            <th>Nama Akun</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($subdivision as $item)
+                                        @foreach ($user as $item)
                                             <tr>
                                                 <td width="10">{{ $loop->iteration }}</td>
-                                                <td>
-                                                    {{ $item->name }}
+                                                <td width="150">
+                                                    <div class="thumbnail">
+                                                        <div class="thumb">
+                                                            <a href="{{ $item->avatar == '' ? asset('img/user.png') : url(Storage::url($item->avatar)) }}"
+                                                                data-lightbox="1" data-title="{{ $item->judul }}"
+                                                                data-toggle="lightbox">
+                                                                <img src="{{ $item->avatar == '' ? asset('img/user.png') : url(Storage::url($item->avatar)) }}"
+                                                                    alt="{{ $item->judul }}" class="img-fluid img-avatar"
+                                                                    width="50">
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    {{ $item->phone }}
-                                                </td>
-                                                <td>
-                                                    {!! Str::limit($item->address, 50) !!}
-                                                </td>
-                                                <td>
-                                                    {{ $item->manager }}
+                                                    {{ $item->name }}<br>
+                                                    <p class="text-muted">{{ $item->email }}</p>
                                                 </td>
                                                 <td width="200">
-                                                    <button type="button" class="btn btn-light-success btn-md"
-                                                        data-toggle="modal" data-target=".view-{{ $item->id }}"><i
-                                                            class="icon feather icon-eye f-16"></i>
-                                                        Detail</button>
+
                                                     <button type="button" class="btn btn-light-warning btn-md"
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
                                                         Edit</button>
-                                                    @include('admin.subdivision.modal_edit')
-                                                    @include('admin.subdivision.modal_view')
-                                                    <form method="POST"
-                                                        action="{{ url('/admin/subdivision/destroy', $item->id) }}"
-                                                        class="d-inline-block">
+                                                    {{-- @include('admin.user.modal_edit') --}}
+                                                    <form method="POST" action="" class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
@@ -90,9 +88,5 @@
             <!-- [ Main Content ] end -->
         </div>
     </section>
-    @include('admin.subdivision.modal_create')
+    {{-- @include('admin.user.modal_create') --}}
 @endsection
-@push('js')
-    <!-- CKEditor -->
-    <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>
-@endpush

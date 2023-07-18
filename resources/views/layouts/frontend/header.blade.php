@@ -72,10 +72,17 @@
             <div class="ml-auto">
                 <ul class="list-unstyled">
                     <li class="dropdown pc-h-item">
-                        <a class="pc-head-link  arrow-none mr-0" href="{{ url('/login') }}">
-                            <i data-feather="log-in"></i>&nbsp;Login
-                        </a>
+                        @guest
+                            <a class="pc-head-link  arrow-none mr-0" href="{{ url('/login') }}">
+                                <i data-feather="log-in"></i>&nbsp;Login
+                            </a>
+                        @else
+                            <a class="pc-head-link  arrow-none mr-0" href="{{ url('/login') }}">
+                                <i data-feather="airplay"></i>&nbsp;Dashboard
+                            </a>
+                        @endguest
                     </li>
+
                 </ul>
             </div>
 

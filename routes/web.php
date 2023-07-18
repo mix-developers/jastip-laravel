@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackagePriceController;
 use App\Http\Controllers\SubdivisionController;
 use App\Http\Controllers\TransportationController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\TransportationController;
 */
 
 Route::get('/', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
+Route::get('/status/{resi}', [App\Http\Controllers\FrontController::class, 'status'])->name('status');
+Route::post('/search_resi', [App\Http\Controllers\FrontController::class, 'search_resi'])->name('search_resi');
 
 Auth::routes();
 
@@ -44,4 +47,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::post('/package_price/store', [PackagePriceController::class, 'store'])->name('package_price.store');
     Route::put('/package_price/update/{id}', [PackagePriceController::class, 'update'])->name('package_price.update');
     Route::delete('/package_price/destroy/{id}', [PackagePriceController::class, 'destroy'])->name('package_price.destroy');
+    // orders
+    Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
+    Route::get('/order/{resi}', [OrderController::class, 'show'])->name('show');
+    Route::get('/order/print/{id}', [OrderController::class, 'print'])->name('order.print');
+    Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/order/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::delete('/order/destroyStatus/{id}', [OrderController::class, 'destroyStatus'])->name('order.destroyStatus');
+    //user
+    Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+    Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akun'])->name('user.akun');
 });

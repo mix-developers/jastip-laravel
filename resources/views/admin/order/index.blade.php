@@ -9,6 +9,15 @@
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
             <div class="row">
+                @if ($errors->any())
+                    <div class="col-12">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- subscribe start -->
 
                 <div class="col-12">
@@ -32,48 +41,56 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Cabang</th>
-                                            <th>Nomor HP</th>
-                                            <th>Alamat</th>
-                                            <th>Manager</th>
+                                            <th>Resi</th>
+                                            <th>Tanggal Input</th>
+                                            <th>Harga</th>
+                                            <th>Asal</th>
+                                            <th>Tujuan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($subdivision as $item)
+                                        @foreach ($order as $item)
                                             <tr>
                                                 <td width="10">{{ $loop->iteration }}</td>
                                                 <td>
-                                                    {{ $item->name }}
+                                                    {{ $item->resi }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->phone }}
+                                                    {{ $item->date }}
                                                 </td>
                                                 <td>
-                                                    {!! Str::limit($item->address, 50) !!}
+                                                    {{ $item->price }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->manager }}
+                                                    {{ $item->from_subdivision->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $item->to_subdivision->name }}
                                                 </td>
                                                 <td width="200">
-                                                    <button type="button" class="btn btn-light-success btn-md"
-                                                        data-toggle="modal" data-target=".view-{{ $item->id }}"><i
+                                                    <a href="{{ url('/admin/order/print', $item->id) }}"
+                                                        class="btn btn-light-primary btn-md"><i
+                                                            class="icon feather icon-printer f-16"></i>
+                                                    </a>
+                                                    <a href="{{ url('/admin/order', $item->resi) }}"
+                                                        class="btn btn-light-success btn-md"><i
                                                             class="icon feather icon-eye f-16"></i>
-                                                        Detail</button>
+                                                    </a>
                                                     <button type="button" class="btn btn-light-warning btn-md"
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
-                                                        Edit</button>
-                                                    @include('admin.subdivision.modal_edit')
-                                                    @include('admin.subdivision.modal_view')
+                                                    </button>
+                                                    {{-- @include('admin.order.modal_edit')
+                                                    @include('admin.order.modal_view') --}}
                                                     <form method="POST"
-                                                        action="{{ url('/admin/subdivision/destroy', $item->id) }}"
+                                                        action="{{ url('/admin/order/destroy', $item->id) }}"
                                                         class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
                                                             class="btn btn-light-danger btn-md delete-button"><i
-                                                                class="feather icon-trash-2  f-16 "></i> Delete
+                                                                class="feather icon-trash-2  f-16 "></i>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -90,9 +107,22 @@
             <!-- [ Main Content ] end -->
         </div>
     </section>
-    @include('admin.subdivision.modal_create')
+    @include('admin.order.modal_create')
 @endsection
 @push('js')
     <!-- CKEditor -->
     <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var sum = 0;
+
+        $(".myclass").on("change", function() {
+            var value1 = document.getElementById('harga').value;
+            var value2 = document.getElementById('berat').value;
+            var sum = parseInt(value1) * (parseInt(value2) / 1000);
+            document.getElementById('result').innerHTML = sum;
+            document.getElementById('hasil').value = sum;
+        });
+    </script>
 @endpush

@@ -24,6 +24,12 @@
     <li class="pc-item pc-caption">
         <label>Transaksi</label>
     </li>
+    <li class="pc-item"><a href="{{ url('/admin/order') }}" class="pc-link "><span class="pc-micon"><i
+                    data-feather="box"></i></span><span class="pc-mtext">Input Paket</span></a>
+    </li>
+    <li class="pc-item"><a href="{{ url('/admin/invoice') }}" class="pc-link "><span class="pc-micon"><i
+                    data-feather="file"></i></span><span class="pc-mtext">Invoice</span></a>
+    </li>
     {{-- <li class="pc-item pc-hasmenu">
         <a href="javascript:void(0)" class="pc-link"><span class="pc-micon"><i data-feather="home"></i></span><span
                 class="pc-mtext">Modul Konter</span><span class="pc-arrow"><i
@@ -41,7 +47,7 @@
         <a href="javascript:void(0)" class="pc-link"><span class="pc-micon"><i data-feather="users"></i></span><span
                 class="pc-mtext">Modul User</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
         <ul class="pc-submenu">
-            <li class="pc-item"><a href="{{ url('admin/akun/admin') }}" class="pc-link ">Akun Admin</a></li>
+            <li class="pc-item"><a href="{{ url('admin/user') }}" class="pc-link ">Akun Admin</a></li>
         </ul>
     </li>
     <li class="pc-item pc-caption">

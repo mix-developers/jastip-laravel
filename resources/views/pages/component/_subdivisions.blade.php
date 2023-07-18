@@ -1,3 +1,8 @@
+<div class="col-12 mb-3">
+    <div class="p-2 bg-white shadow-sm text-center">
+        <h2 class="text-success">Alamat Pengiriman</h2>
+    </div>
+</div>
 <div class="col-12">
     <div class="row justify-content-center">
         @foreach ($subdivision as $item)

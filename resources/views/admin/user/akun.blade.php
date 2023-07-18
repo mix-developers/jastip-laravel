@@ -1,10 +1,10 @@
-@extends('layouts.backand.admin')
+@extends('layouts.backend.admin')
 
 @section('content')
     <div class="pc-container">
         <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
-            @include('layouts.backand.title')
+            @include('layouts.backend.title')
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
             <div class="row">
