@@ -22,4 +22,8 @@ class OrderStatus extends Model
     {
         return $this->belongsTo(Status::class, 'id_status');
     }
+    public static function getCountInput($id_user)
+    {
+        return self::where('id_user', $id_user)->where('id_status', 1)->count();
+    }
 }

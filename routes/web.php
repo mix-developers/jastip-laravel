@@ -52,11 +52,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
     Route::get('/order/{resi}', [OrderController::class, 'show'])->name('show');
     Route::get('/order/print/{id}', [OrderController::class, 'print'])->name('order.print');
+    Route::get('/order/printInvoice/{id}', [OrderController::class, 'printInvoice'])->name('order.printInvoice');
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/order/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::delete('/order/destroyStatus/{id}', [OrderController::class, 'destroyStatus'])->name('order.destroyStatus');
+    //order status update
+    Route::get('/update_status', [OrderController::class, 'update_status'])->name('update_status');
+    Route::get('/status', [OrderController::class, 'cek_resi'])->name('cek_resi');
     //user
     Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
     Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akun'])->name('user.akun');
+    //user
+    Route::get('report', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
+    Route::post('/report/export', [App\Http\Controllers\ReportController::class, 'export'])->name('report.export');
 });

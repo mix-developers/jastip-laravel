@@ -21,6 +21,10 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class, 'id_customer', 'id');
     }
+    public function transportation(): BelongsTo
+    {
+        return $this->belongsTo(Transportation::class, 'id_transportation', 'id');
+    }
     public function order_status()
     {
         return $this->hasMany(OrderStatus::class, 'id_order');

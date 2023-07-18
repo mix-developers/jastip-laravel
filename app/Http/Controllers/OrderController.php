@@ -19,6 +19,13 @@ class OrderController extends Controller
         ];
         return view('admin.order.index', $data);
     }
+    public function update_status()
+    {
+        $data = [
+            'title' => 'Cek Resi',
+        ];
+        return view('admin.order.status.update_status', $data);
+    }
     public function invoice()
     {
         $data = [
@@ -38,6 +45,26 @@ class OrderController extends Controller
             'order_status' => $order_status,
         ];
         return view('admin.order.show', $data);
+    }
+    public function cek_resi(Request $request)
+    {
+
+        $order = Order::where('resi', $request->resi)->first();
+        if ($order != null) {
+            $order_status = OrderStatus::with(['orders', 'status', 'user'])->where('id_order', $order->id)->get();
+
+            $data = [
+                'title' => 'Daftar Paket',
+                'order' => $order,
+                'order_status' => $order_status,
+            ];
+            return view('admin.order.show', $data);
+        } else {
+            $data = [
+                'title' => 'Paket tidak tersedia',
+            ];
+            return view('admin.order.status.not_found', $data);
+        }
     }
 
     public function store(Request $request)
@@ -129,7 +156,7 @@ class OrderController extends Controller
         $order = Order::where('id', $id)
             ->first();
         $qr = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($order->resi));
-        $pdf = PDF::loadview('admin/order/print', ['order' => $order, 'qr' => $qr])->setPaper(array(0, 0, 160, 330));
-        return $pdf->stream('order_' . $id . '.pdf');
+        $pdf = PDF::loadview('admin/order/invoice/print', ['order' => $order, 'qr' => $qr])->setPaper("A4", "portrait");
+        return $pdf->stream('invoice_' . $order->resi . '.pdf');
     }
 }

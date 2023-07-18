@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="row ">
-        @include('pages.component._tracking')
+        @if ($order != null)
+            @include('pages.component._tracking')
+        @else
+            @include('pages.component._not_found')
+        @endif
     </div>
 @endsection

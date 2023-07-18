@@ -1,27 +1,14 @@
 @extends('layouts.backend.admin')
-
 @section('content')
     <div class="pc-container">
         <div class="pcoded-content">
             @include('layouts.backend.title')
             <div class="row">
-
                 <div class="col-12">
-
-                    <div class="card">
-                        <div class="card-header">{{ __('Dashboard') }} Admin</div>
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                            {{ __('You are logged in!') }}
-
-                        </div>
-                    </div>
-
+                    @include('admin.component._count_items')
+                </div>
+                <div class="col-12">
+                    @include('admin.component._employee')
                 </div>
             </div>
         </div>
