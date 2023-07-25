@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackagePriceController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubdivisionController;
 use App\Http\Controllers\TransportationController;
 
@@ -47,6 +48,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::post('/package_price/store', [PackagePriceController::class, 'store'])->name('package_price.store');
     Route::put('/package_price/update/{id}', [PackagePriceController::class, 'update'])->name('package_price.update');
     Route::delete('/package_price/destroy/{id}', [PackagePriceController::class, 'destroy'])->name('package_price.destroy');
+    // slider
+    Route::get('/slider', [SliderController::class, 'index'])->name('slider');
+    Route::post('/slider/store', [SliderController::class, 'store'])->name('slider.store');
+    Route::put('/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::delete('/slider/destroy/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
     // orders
     Route::get('/order', [OrderController::class, 'index'])->name('order');
     Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
@@ -63,7 +69,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     //user
     Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
     Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akun'])->name('user.akun');
-    //user
+    Route::post('user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+    Route::put('user/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    Route::delete('user/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
+    //laporan
     Route::get('report', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
     Route::post('/report/export', [App\Http\Controllers\ReportController::class, 'export'])->name('report.export');
 });

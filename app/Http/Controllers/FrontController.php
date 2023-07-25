@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\PackagePrice;
+use App\Models\Slider;
 use App\Models\Subdivision;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class FrontController extends Controller
             'title' => 'Home',
             'subdivision' => Subdivision::all(),
             'package_price' => PackagePrice::all(),
+            'slider' => Slider::all(),
         ];
         return view('pages.index', $data);
     }

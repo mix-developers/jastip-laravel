@@ -9,6 +9,9 @@
     <li class="pc-item pc-caption">
         <label>Master Data</label>
     </li>
+    <li class="pc-item"><a href="{{ url('/admin/slider') }}" class="pc-link "><span class="pc-micon"><i
+                    data-feather="image"></i></span><span class="pc-mtext">Iklan</span></a>
+    </li>
     <li class="pc-item"><a href="{{ url('/admin/customer') }}" class="pc-link "><span class="pc-micon"><i
                     data-feather="user-check"></i></span><span class="pc-mtext">Customer</span></a>
     </li>

@@ -95,7 +95,7 @@
                                         @foreach ($order_status as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img src="{{ $item->thumnnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                                <td><img src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
                                                         alt="{{ $item->status->status }}" class="img-fluid img-avatar"
                                                         width="50"></td>
                                                 <td>

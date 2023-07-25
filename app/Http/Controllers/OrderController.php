@@ -6,8 +6,10 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use PDF;
 use QrCode;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -76,6 +78,7 @@ class OrderController extends Controller
             'id_transportation' => ['required'],
             'price' => ['required'],
             'wight_item' => ['required'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp'],
         ]);
         $milliseconds = round(microtime(true) * 1000);
         $order = new Order;
@@ -90,12 +93,17 @@ class OrderController extends Controller
         $order->resi = 'AKC' . $milliseconds;
         $order->save();
 
+        if ($request->hasFile('thumbnail')) {
+            $filename = Str::random(32) . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $file_path = $request->file('thumbnail')->storeAs('public/uploads', $filename);
+        }
+
         $order_status = new OrderStatus();
         $order_status->orders()->associate($order);
         $order_status->id_status = 1;
         $order_status->id_user = Auth::user()->id;
         $order_status->date = date('d-m-Y');
-
+        $order_status->thumbnail = isset($file_path) ? $file_path : '';
 
 
         if ($order_status->save()) {
@@ -139,8 +147,11 @@ class OrderController extends Controller
     }
     public function destroyStatus($id)
     {
-        $order = OrderStatus::find($id);
-        $order->delete();
+        $status = OrderStatus::find($id);
+        if ($status->thumbnail != '') {
+            Storage::delete($status->thumbnail);
+        }
+        $status->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus status');
     }
     public function print($id)

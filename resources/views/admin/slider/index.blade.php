@@ -10,60 +10,73 @@
             <!-- [ Main Content ] start -->
             <div class="row">
                 <!-- subscribe start -->
-                <div class="col-md-12">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5>{{ $title }}</h5>
+                            <h5>Tambah pelanggan</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row align-items-center m-l-0">
-                                <div class="col-sm-6">
+                            <form method="POST" action="{{ url('/admin/slider/store') }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Thumbnail </label>
+                                    <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
+                                        name="thumbnail">
                                 </div>
-                                <div class="col-sm-6 text-right">
-                                    <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
-                                        data-target=".tambah"><i class="feather f-16 icon-plus"></i>
-                                        Tambah</button>
+                                <div class="form-group">
+                                    <label for="name">Judul</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name">
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                        name="description">
+                                </div>
+
+                                <button type="submit" class="btn  btn-primary">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>{{ $title }} </h5>
+                        </div>
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped mb-0 lara-dataTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Avatar</th>
-                                            <th>Nama Akun</th>
+                                            <th>Thumbnail</th>
+                                            <th>Judul</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($user as $item)
+                                        @foreach ($slider as $item)
                                             <tr>
                                                 <td width="10">{{ $loop->iteration }}</td>
-                                                <td width="150">
-                                                    <div class="thumbnail">
-                                                        <div class="thumb">
-                                                            <a href="{{ $item->avatar == '' ? asset('img/user.png') : url(Storage::url($item->avatar)) }}"
-                                                                data-lightbox="1" data-title="{{ $item->judul }}"
-                                                                data-toggle="lightbox">
-                                                                <img src="{{ $item->avatar == '' ? asset('img/user.png') : url(Storage::url($item->avatar)) }}"
-                                                                    alt="{{ $item->judul }}" class="img-fluid img-avatar"
-                                                                    width="50">
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                <td>
+                                                    <img src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                                        alt="{{ $item->name }}" class="img-fluid img-avatar"
+                                                        width="150">
                                                 </td>
                                                 <td>
-                                                    {{ $item->name }}<br>
-                                                    <p class="text-muted">{{ $item->email }}</p>
+                                                    {{ $item->name }}
+                                                    <br><small class="text-muted">Keterangan
+                                                        : {{ Str::limit($item->description, 100) }}</small>
                                                 </td>
                                                 <td width="200">
-
                                                     <button type="button" class="btn btn-light-warning btn-md"
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
                                                         Edit</button>
-                                                    @include('admin.user.modal_edit')
-                                                    <form method="POST" action="{{ url('/admin/user/destroy', $item->id) }}"
+                                                    @include('admin.slider.modal_edit')
+                                                    <form method="POST"
+                                                        action="{{ url('/admin/slider/destroy', $item->id) }}"
                                                         class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
@@ -86,5 +99,4 @@
             <!-- [ Main Content ] end -->
         </div>
     </section>
-    @include('admin.user.modal_create')
 @endsection
