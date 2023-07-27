@@ -30,8 +30,8 @@
                                         <span class="input-group-text" id="basic-addon2">Rp</span>
                                     </div>
                                     <input type="text" class="form-control @error('price') is-invalid @enderror"
-                                        placeholder="Harga" aria-label="harga" aria-describedby="basic-addon2"
-                                        name="price">
+                                        placeholder="Harga" aria-label="harga" name="price"
+                                        aria-describedby="basic-addon2">
                                     <div class="input-group-append" name="price">
                                         <span class="input-group-text" id="basic-addon2">/kg</span>
                                     </div>
