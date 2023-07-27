@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackagePriceController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SubdivisionController;
 use App\Http\Controllers\TransportationController;
 
@@ -53,6 +54,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::post('/slider/store', [SliderController::class, 'store'])->name('slider.store');
     Route::put('/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
     Route::delete('/slider/destroy/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+    // statuses
+    Route::get('/statuses', [StatusController::class, 'index'])->name('statuses');
+    Route::post('/statuses/store', [StatusController::class, 'store'])->name('statuses.store');
+    Route::put('/statuses/update/{id}', [StatusController::class, 'update'])->name('statuses.update');
+    Route::delete('/statuses/destroy/{id}', [StatusController::class, 'destroy'])->name('statuses.destroy');
     // orders
     Route::get('/order', [OrderController::class, 'index'])->name('order');
     Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
@@ -60,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::get('/order/print/{id}', [OrderController::class, 'print'])->name('order.print');
     Route::get('/order/printInvoice/{id}', [OrderController::class, 'printInvoice'])->name('order.printInvoice');
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::post('/order/storeStatus', [OrderController::class, 'storeStatus'])->name('order.storeStatus');
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/order/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::delete('/order/destroyStatus/{id}', [OrderController::class, 'destroyStatus'])->name('order.destroyStatus');

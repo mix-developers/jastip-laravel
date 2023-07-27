@@ -64,7 +64,6 @@
                             <th>#</th>
                             <th>Foto</th>
                             <th>Status</th>
-                            <th>Description</th>
                             <th>Petugas</th>
                         </tr>
                     </thead>
@@ -79,7 +78,6 @@
                                     {{ $item->status->status }}<br>
                                     <small class="text-muted">{{ $item->date }}</small>
                                 </td>
-                                <td>{{ $item->description }}</td>
                                 <td>{{ $item->user->name }}</td>
 
                             </tr>

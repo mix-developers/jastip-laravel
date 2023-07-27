@@ -19,6 +19,9 @@
         <li class="pc-item"><a href="{{ url('/admin/subdivision') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="map"></i></span><span class="pc-mtext">Cabang</span></a>
         </li>
+        <li class="pc-item"><a href="{{ url('/admin/statuses') }}" class="pc-link "><span class="pc-micon"><i
+                        data-feather="map"></i></span><span class="pc-mtext">Status Pengiriman</span></a>
+        </li>
         <li class="pc-item"><a href="{{ url('/admin/transportation') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="briefcase"></i></span><span class="pc-mtext">Transportasi</span></a>
         </li>

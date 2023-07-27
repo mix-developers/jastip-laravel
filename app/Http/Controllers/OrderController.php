@@ -89,6 +89,7 @@ class OrderController extends Controller
         $order->price = $request->price;
         $order->date_estimate = $request->date_estimate;
         $order->wight_item = $request->wight_item;
+        $order->description = $request->description;
         $order->date = date('d-m-Y');
         $order->resi = 'AKC' . $milliseconds;
         $order->save();
@@ -105,6 +106,33 @@ class OrderController extends Controller
         $order_status->date = date('d-m-Y');
         $order_status->thumbnail = isset($file_path) ? $file_path : '';
 
+
+        if ($order_status->save()) {
+
+            return redirect()->back()->with('success', 'Berhasil menambahkan data');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal menambahkan data');
+        }
+    }
+    public function storeStatus(Request $request)
+    {
+        $request->validate([
+            'id_status' => ['required'],
+            'id_order' => ['required'],
+            'thumbnail' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp'],
+        ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $filename = Str::random(32) . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $file_path = $request->file('thumbnail')->storeAs('public/uploads', $filename);
+        }
+
+        $order_status = new OrderStatus();
+        $order_status->id_order = $request->id_order;
+        $order_status->id_status = $request->id_status;
+        $order_status->id_user = Auth::user()->id;
+        $order_status->date = date('d-m-Y');
+        $order_status->thumbnail = isset($file_path) ? $file_path : '';
 
         if ($order_status->save()) {
 

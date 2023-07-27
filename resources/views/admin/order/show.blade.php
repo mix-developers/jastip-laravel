@@ -86,7 +86,6 @@
                                             <th>#</th>
                                             <th>Foto</th>
                                             <th>Status</th>
-                                            <th>Description</th>
                                             <th>Petugas</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -102,7 +101,6 @@
                                                     {{ $item->status->status }}<br>
                                                     <small class="text-muted">{{ $item->date }}</small>
                                                 </td>
-                                                <td>{{ $item->description }}</td>
                                                 <td>{{ $item->user->name }}</td>
                                                 <td>
                                                     <form method="POST"

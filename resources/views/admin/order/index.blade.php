@@ -43,6 +43,7 @@
                                             <th>#</th>
                                             <th>Resi</th>
                                             <th>Tanggal Input</th>
+                                            <th>Customer</th>
                                             <th>Harga</th>
                                             <th>Asal</th>
                                             <th>Tujuan</th>
@@ -58,6 +59,10 @@
                                                 </td>
                                                 <td>
                                                     {{ $item->date }}
+                                                </td>
+                                                <td>
+                                                    {{ $item->customer->name }}
+                                                    <br><small class="text-muted">{{ $item->customer->phone }}</small>
                                                 </td>
                                                 <td>
                                                     {{ $item->price }}

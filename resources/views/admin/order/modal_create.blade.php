@@ -10,14 +10,9 @@
 
                 <form method="POST" action="{{ url('/admin/order/store') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Foto Paket</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
+                    <div class="form-group mb-3">
+                        <label>Upload foto paket</label>
+                        <input type="file" class="form-control" id="thumbnail" name="thumbnail">
                     </div>
                     <div class="form-group">
                         <label for="id_customer">Pelanggan</label>
