@@ -86,8 +86,8 @@
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
                                                     </button>
-                                                    {{-- @include('admin.order.modal_edit')
-                                                    @include('admin.order.modal_view') --}}
+                                                    @include('admin.order.modal_edit')
+                                                    {{-- @include('admin.order.modal_view') --}}
                                                     <form method="POST"
                                                         action="{{ url('/admin/order/destroy', $item->id) }}"
                                                         class="d-inline-block">
