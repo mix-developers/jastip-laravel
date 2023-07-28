@@ -117,8 +117,8 @@
 @push('js')
     <!-- CKEditor -->
     <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
     <script>
         var sum = 0;
 
@@ -128,6 +128,15 @@
             var sum = parseInt(value1) * (parseInt(value2) / 1000);
             document.getElementById('result').innerHTML = sum;
             document.getElementById('hasil').value = sum;
+        });
+
+        var sum_edit = 0;
+        $(".myclass_edit").on("change", function() {
+            var value1_edit = document.getElementById('harga_edit').value;
+            var value2_edit = document.getElementById('berat_edit').value;
+            var sum_edit = parseInt(value1_edit) * (parseInt(value2_edit) / 1000);
+            document.getElementById('result_edit').innerHTML = sum_edit;
+            document.getElementById('hasil_edit').value = sum_edit;
         });
     </script>
 @endpush

@@ -85,8 +85,8 @@
                             <div class="col-6">
                                 <label for="wight_item">Berat Paket </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control myclass" placeholder="0"
-                                        aria-describedby="berat" name="wight_item" id="berat"
+                                    <input type="text" class="form-control myclass_edit" placeholder="0"
+                                        aria-describedby="berat_edit" name="wight_item" id="berat_edit"
                                         value="{{ $item->wight_item }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">gram</span>
@@ -96,10 +96,10 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Paket Harga </label>
-                                    <select name="" id="harga" class="form-control myclass" required>
-                                        <option value="">--Pilih --</option>
+                                    <select name="" id="harga_edit" class="form-control myclass_edit">
+                                        <option value="0">--Pilih --</option>
                                         @foreach (App\Models\PackagePrice::all() as $pric)
-                                            <option value="{{ $pric->price }}">{{ $item->name }}
+                                            <option value="{{ $pric->price }}">{{ $pric->name }}
                                                 ({{ $pric->price }})
                                             </option>
                                         @endforeach
@@ -107,15 +107,15 @@
                                 </div>
                             </div>
                         </div>
-                        <h2 class="text-danger">Rp <span id="result">{{ $item->price }}</span></h2>
+                        <h2 class="text-danger">Rp <span id="result_edit"></span></h2>
                     </div>
                     <label for="price">Harga Kirim </label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp</span>
                         </div>
-                        <input type="text" id="hasil" class="form-control" placeholder="0"
-                            aria-describedby="hasil" name="price" value="{{ $item->price }}">
+                        <input type="text" id="hasil_edit" class="form-control" placeholder="0"
+                            aria-describedby="hasil_edit" name="price" value="{{ $item->price }}">
                     </div>
 
                     <div class="form-group ">
