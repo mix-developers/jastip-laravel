@@ -129,14 +129,18 @@
             document.getElementById('result').innerHTML = sum;
             document.getElementById('hasil').value = sum;
         });
-
-        var sum_edit = 0;
-        $(".myclass_edit").on("change", function() {
-            var value1_edit = document.getElementById('harga_edit').value;
-            var value2_edit = document.getElementById('berat_edit').value;
-            var sum_edit = parseInt(value1_edit) * (parseInt(value2_edit) / 1000);
-            document.getElementById('result_edit').innerHTML = sum_edit;
-            document.getElementById('hasil_edit').value = sum_edit;
-        });
     </script>
+    @foreach ($order as $item)
+        <script>
+            var sum_edit{{ $item->id }} = {{ $item->price }};
+            $(".myclass_edit{{ $item->id }}").on("change", function() {
+                var value1_edit{{ $item->id }} = document.getElementById('harga_edit{{ $item->id }}').value;
+                var value2_edit{{ $item->id }} = document.getElementById('berat_edit{{ $item->id }}').value;
+                var sum_edit{{ $item->id }} = parseInt(value1_edit{{ $item->id }}) * (parseInt(
+                    value2_edit{{ $item->id }}) / 1000);
+                document.getElementById('result_edit{{ $item->id }}').innerHTML = sum_edit{{ $item->id }};
+                document.getElementById('hasil_edit{{ $item->id }}').value = sum_edit{{ $item->id }};
+            });
+        </script>
+    @endforeach
 @endpush
