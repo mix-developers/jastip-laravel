@@ -97,7 +97,7 @@
                                 <div class="form-group">
                                     <label for="">Paket Harga </label>
                                     <select name="" id="harga_edit" class="form-control myclass_edit">
-                                        <option value="0">--Pilih --</option>
+                                        <option value="">--Pilih --</option>
                                         @foreach (App\Models\PackagePrice::all() as $pric)
                                             <option value="{{ $pric->price }}">{{ $pric->name }}
                                                 ({{ $pric->price }})
