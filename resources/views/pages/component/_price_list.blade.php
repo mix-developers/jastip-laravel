@@ -22,27 +22,27 @@
     <div class="card">
         <div class="card-body ">
             <div class="table-responsive">
-                table class="table table-bordered ">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tujuan</th>
-                        <th>Harga</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($package_price as $item)
+                <table class="table table-bordered ">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>Rp {{ number_format($item->price) }} / Kg</td>
+                            <th>#</th>
+                            <th>Tujuan</th>
+                            <th>Harga</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center"></td>
-                        </tr>
-                    @endforelse
-                </tbody>
+                    </thead>
+                    <tbody>
+                        @forelse ($package_price as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>Rp {{ number_format($item->price) }} / Kg</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center"></td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                 </table>
             </div>
             < </div>
